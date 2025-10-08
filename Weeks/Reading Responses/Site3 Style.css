@@ -1,50 +1,54 @@
 
-            body {
-                background-image: url('Tv3.jpg'); 
-                background-size: cover; 
-                background-position: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
+body {
+    background-image: url('Tv3.jpg'); 
+    background-size: cover; 
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
-            main{
-                color: black; 
-                text-align: center; 
-                font-size: 64px; 
-                font-family: 'Times New Roman', Times, serif;
-                margin: 16px 0 24px;
-                font-weight: bold;
-            }
+main{
+    color: black; 
+    text-align: center; 
+    font-size: 64px; 
+    font-family: 'Times New Roman', Times, serif;
+    margin: 16px 0 24px;
+    font-weight: bold;
+}
 
-            main:hover {
-                font-family:  "Rock Salt", cursive;
-                transform: scale(1.05);
-            }
+main:hover {
+    font-family:  "Rock Salt", cursive;
+    transform: scale(1.05);
+}
 
-            p {
-                text-align: center;
-                color: black;
-                font-size: 36px;
-                font-family: 'Times New Roman', Times, serif;
-                max-width: 1000px;
-                font-weight: bold;
-            }
+.highlight-green {
+    background-color: lightgreen;
+}
 
-            .box {
-                font-size: 36px;
-                margin: 50px;
-                border-radius: 15px;
-            }
+p {
+    text-align: center;
+    color: black;
+    font-size: 36px;
+    font-family: 'Times New Roman', Times, serif;
+    max-width: 1000px;
+    font-weight: bold;
+}
 
-            .box a {
-                text-decoration: none;
-                color: black;
-                font-weight: bold;
-                }
+.box {
+    font-size: 36px;
+    margin: 50px;
+    border-radius: 15px;
+}
 
-            .box:hover a {
-                color: white;    
-                }
+.box a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.box:hover a {
+    color: white;    
+}
