@@ -1,0 +1,88 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Georgia, 'Times New Roman', serif;
+  margin: 0;
+}
+
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 48px;
+  color: white;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInMove 1.5s ease-out forwards;
+}
+
+@keyframes fadeInMove {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gallery {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 per row */
+  gap: 15px 30px;
+  margin-bottom: 15px;
+}
+
+.item {
+  background-color: #111;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid #444;
+  border-radius: 2px;
+  background-color: #000;
+}
+
+/* caption */
+.item figcaption {
+  color: white;
+  font-size: 16px;
+  margin-top: 12px;
+  font-family: "Georgia", "Times New Roman", serif;
+  letter-spacing: 0.03em;
+}
+
+button {
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  border-color: white;
+  background-color: black;
+  color: white;
+}
