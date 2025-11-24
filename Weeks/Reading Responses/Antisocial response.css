@@ -30,7 +30,6 @@ body {
   padding: 2rem;
 }
 
-/* Slightly different colors per page just for fun */
 .page-1 {
   background: radial-gradient(circle at top, #222244, #05060a);
 }
@@ -39,7 +38,6 @@ body {
   background: radial-gradient(circle at top, #442222, #05060a);
 }
 
-/* Button style */
 .btn {
   display: inline-block;
   padding: 0.8rem 1.6rem;
@@ -74,7 +72,6 @@ body {
   transform: translateX(100%);
 }
 
-/* GLITCH OVERLAY */
 
 .glitch-overlay {
   position: fixed;
@@ -91,13 +88,11 @@ body {
   z-index: 9999;
 }
 
-/* When active, run glitch animation */
 .glitch-overlay.active {
   opacity: 1;
   animation: glitch 0.7s steps(2, end) forwards;
 }
 
-/* Optional RGB offset layers using pseudo-elements */
 .glitch-overlay::before,
 .glitch-overlay::after {
   content: "";
@@ -118,7 +113,7 @@ body {
   filter: hue-rotate(200deg);
 }
 
-/* Glitch keyframes - slices + shakes */
+
 @keyframes glitch {
   0% {
     clip-path: inset(0 0 90% 0);
@@ -149,4 +144,27 @@ body {
     transform: translate(0, 0);
     opacity: 0;
   }
+}
+
+.redirect-container {
+  text-align: center;
+  animation: fadeIn 1.5s ease-in-out;
+  padding: 2rem;
+}
+
+.redirect-container h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.redirect-container p {
+  font-size: 1.2rem;
+  opacity: 0.85;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

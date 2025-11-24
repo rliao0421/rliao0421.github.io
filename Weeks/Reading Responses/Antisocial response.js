@@ -2,25 +2,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.querySelector(".glitch-overlay");
   const links = document.querySelectorAll(".glitch-link");
 
-  if (!overlay || links.length === 0) return;
+  if (!overlay) return;
 
-  links.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
 
-      const targetHref = link.getAttribute("href");
-      if (!targetHref) return;
+  if (links.length > 0) {
+    links.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
 
-      // Add active class to start the animation
-      overlay.classList.add("active");
+        const targetHref = link.getAttribute("href");
+        if (!targetHref) return;
 
-      // When animation finishes, go to the next page
-      const handleAnimationEnd = () => {
-        overlay.removeEventListener("animationend", handleAnimationEnd);
-        window.location.href = targetHref;
-      };
+        overlay.classList.add("active");
 
-      overlay.addEventListener("animationend", handleAnimationEnd);
+        const handleAnimationEnd = () => {
+          overlay.removeEventListener("animationend", handleAnimationEnd);
+          window.location.href = targetHref;
+        };
+
+        overlay.addEventListener("animationend", handleAnimationEnd);
+      });
     });
-  });
+  }
+
+  setTimeout(() => {
+
+    overlay.classList.add("active");
+
+    const handleAutoEnd = () => {
+      overlay.removeEventListener("animationend", handleAutoEnd);
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    };
+
+    overlay.addEventListener("animationend", handleAutoEnd);
+  }, 5000); 
 });
