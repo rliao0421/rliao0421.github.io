@@ -1,0 +1,70 @@
+body {
+  background-color: #0000FE;
+  color: #FFFF01;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Tiny5", sans-serif;
+  padding-top: 24px;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center; 
+  gap: 20px;       
+}
+
+h1 {
+  color: #FFFF01;
+  font-family: "Sixtyfour", sans-serif;
+  font-weight: 400;
+  overflow: hidden; 
+  border-right: .15em solid #FFFF01; 
+  white-space: nowrap;
+  width: 0;
+  animation: typing 2.5s steps(10, end) forwards, blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 9ch } /* adjust to match number of characters in 'BlackLash' */
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+p {
+  max-width: 700px;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+img {
+  display: block;
+  width: 600px;
+  height: 400px;  
+}
+
+button {
+  background-color: #FFFF01;
+  color: #0000FE;
+  font-family: "Tiny5", sans-serif;
+  font-size: 16px;
+  border: 2px solid transparent;
+  border-radius: 0; 
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  border-color: #FFFF01;
+  background-color: #0000FE;
+  color: #FFFF01;
+}
