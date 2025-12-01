@@ -74,6 +74,11 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 .box {
   text-align: center;
   border: 8px solid #ED6A5A;
@@ -92,7 +97,4 @@ body {
 .box:hover { background-color: #ED6A5A; }
 .box:hover a { color: white; }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
+
