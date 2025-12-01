@@ -4,36 +4,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!overlay) return;
 
+  let userClicked = false;
 
-  if (links.length > 0) {
-    links.forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
+  // --------- GLITCH NAVIGATION (Page 1 <-> Page 2) ---------
+  links.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      userClicked = true; // user chose navigation
 
-        const targetHref = link.getAttribute("href");
-        if (!targetHref) return;
+      const targetHref = link.getAttribute("href");
+      if (!targetHref) return;
 
-        overlay.classList.add("active");
+      overlay.classList.add("active");
 
-        const handleAnimationEnd = () => {
-          overlay.removeEventListener("animationend", handleAnimationEnd);
-          window.location.href = targetHref;
-        };
+      const handleTransition = () => {
+        overlay.removeEventListener("animationend", handleTransition);
+        window.location.href = targetHref;
+      };
 
-        overlay.addEventListener("animationend", handleAnimationEnd);
-      });
+      overlay.addEventListener("animationend", handleTransition, { once: true });
     });
-  }
+  });
 
+  // --------- AUTO REDIRECT (happens independently on every page) ---------
   setTimeout(() => {
+    if (userClicked) return; // user clicked link: skip auto redirect
 
     overlay.classList.add("active");
 
-    const handleAutoEnd = () => {
-      overlay.removeEventListener("animationend", handleAutoEnd);
-      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-    };
+    // Wait for glitch animation (0.7s)
+    setTimeout(() => {
+      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+      overlay.classList.remove("active");
+    }, 700);
 
-    overlay.addEventListener("animationend", handleAutoEnd);
-  }, 5000); 
+  }, 5000); // auto redirect timing
+});
+
+
+// --------- INTRO SCREEN FADE OUT ---------
+document.addEventListener("DOMContentLoaded", () => {
+  const intro = document.querySelector(".intro-screen");
+  if (!intro) return;
+
+  intro.addEventListener("animationend", () => {
+    intro.style.display = "none";
+  });
 });
