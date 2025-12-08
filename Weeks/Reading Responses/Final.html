@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+
+  <link rel="stylesheet" href="Final.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
+  <script src="Final.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Expense Tracker</h1>
+      <p>Track your spending and see where your money goes.</p>
+    </header>
+
+    <main>
+      <section class="left-panel">
+        <div class="card">
+          <h2>Add Expense</h2>
+          <form id="expense-form">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" id="description" placeholder="e.g. Coffee" required />
+            </div>
+
+            <div class="form-group">
+              <label for="amount">Amount ($)</label>
+              <input type="number" id="amount" step="0.01" min="0" placeholder="e.g. 4.50" required />
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" required>
+                <option value="" disabled selected>Select category</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Bills">Bills</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary">Add Expense</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Summary</h2>
+          <div class="summary-row">
+            <span>Total Spent:</span>
+            <span id="total-amount">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Number of Expenses:</span>
+            <span id="expense-count">0</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="right-panel">
+        <div class="card">
+          <h2>Spending by Category</h2>
+          <canvas id="expense-chart"></canvas>
+          <p class="chart-hint">The pie chart updates automatically when you add or delete expenses.</p>
+        </div>
+
+        <div class="card">
+          <h2>All Expenses</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="expense-table-body">
+                <!-- Rows added via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
