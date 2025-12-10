@@ -1,7 +1,6 @@
 let expenses = [];
 let expenseChart;
 
-// Run once DOM + Chart.js are ready
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("expense-form");
   const descriptionInput = document.getElementById("description");
@@ -12,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalAmountEl = document.getElementById("total-amount");
   const expenseCountEl = document.getElementById("expense-count");
 
-  // Handle form submit
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -39,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.reset();
   });
 
-  // Use event delegation for delete buttons
+
   tableBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-btn")) {
       const index = e.target.getAttribute("data-index");
@@ -108,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const ctx = document.getElementById("expense-chart").getContext("2d");
 
-    // If chart already exists, just update data
     if (expenseChart) {
       expenseChart.data.labels = labels;
       expenseChart.data.datasets[0].data = data;
@@ -116,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Create chart first time
     expenseChart = new Chart(ctx, {
       type: "pie",
       data: {
@@ -125,8 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
           {
             label: "Spending by Category",
             data,
-            // Chart.js will auto-assign colors if not specified in newer versions,
-            // but here we provide some basic ones.
             backgroundColor: [
               "rgba(79, 70, 229, 0.8)",
               "rgba(16, 185, 129, 0.8)",
@@ -149,6 +144,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Initialize empty chart so layout looks nice even with no data
   updateChart();
 });
