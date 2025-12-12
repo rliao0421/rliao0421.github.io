@@ -7,11 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const amountInput = document.getElementById("amount");
   const categorySelect = document.getElementById("category");
   const tableBody = document.getElementById("expense-table-body");
-
   const totalAmountEl = document.getElementById("total-amount");
   const expenseCountEl = document.getElementById("expense-count");
+  const downloadPdfBtn = document.getElementById("download-pdf");
 
+  // Theme buttons (the ones with data-theme in HTML)
+  const themeButtons = document.querySelectorAll("[data-theme]");
 
+  // --- EVENT LISTENERS ---
+
+  // Add expense
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -38,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.reset();
   });
 
-
+  // Delete expense (event delegation)
   tableBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-btn")) {
       const index = e.target.getAttribute("data-index");
@@ -48,6 +53,23 @@ document.addEventListener("DOMContentLoaded", () => {
       updateChart();
     }
   });
+
+  // Download PDF button
+  if (downloadPdfBtn) {
+    downloadPdfBtn.addEventListener("click", () => {
+      generatePdfReport();
+    });
+  }
+
+  // Theme buttons
+  themeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const themeName = btn.dataset.theme;
+      applyTheme(themeName);
+    });
+  });
+
+  // --- FUNCTIONS ---
 
   function renderTable() {
     tableBody.innerHTML = "";
@@ -114,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Create chart first time
     expenseChart = new Chart(ctx, {
       type: "pie",
       data: {
@@ -144,5 +167,113 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // PDF GENERATION (with chart)
+  function generatePdfReport() {
+    if (!window.jspdf) {
+      alert("jsPDF failed to load.");
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Title
+    doc.setFontSize(16);
+    doc.text("Expense Report", 10, 10);
+
+    // Summary
+    let y = 20;
+    const total = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+    doc.setFontSize(12);
+    doc.text(`Total spent: $${total.toFixed(2)}`, 10, y);
+    y += 7;
+    doc.text(`Number of expenses: ${expenses.length}`, 10, y);
+    y += 12;
+
+    // Table header
+    doc.setFont(undefined, "bold");
+    doc.text("Description", 10, y);
+    doc.text("Category", 80, y);
+    doc.text("Amount", 140, y);
+    doc.setFont(undefined, "normal");
+    y += 6;
+
+    // Expenses list (simple, no auto-page; you can extend later)
+    expenses.forEach((exp) => {
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.text(exp.description.substring(0, 25), 10, y);
+      doc.text(exp.category, 80, y);
+      doc.text(`$${exp.amount.toFixed(2)}`, 140, y);
+      y += 6;
+    });
+
+    // Add chart on a new page
+    const canvas = document.getElementById("expense-chart");
+    if (canvas) {
+      const imgData = canvas.toDataURL("image/png", 1.0);
+      doc.addPage();
+      doc.setFontSize(16);
+      doc.text("Spending by Category", 10, 10);
+      // x, y, width, height
+      doc.addImage(imgData, "PNG", 15, 20, 180, 120);
+    }
+
+    doc.save("expense_report.pdf");
+  }
+
+  // Simple theme system (few preset colors)
+  function applyTheme(themeName) {
+    const themes = {
+      purple: {
+        bodyBg: "#f3f4f6",
+        cardBg: "#ffffff",
+        text: "#111827",
+        primary: "#4f46e5",
+      },
+      teal: {
+        bodyBg: "#ecfeff",
+        cardBg: "#ffffff",
+        text: "#082f49",
+        primary: "#0f766e",
+      },
+      peach: {
+        bodyBg: "#fff7ed",
+        cardBg: "#ffffff",
+        text: "#7c2d12",
+        primary: "#f97316",
+      },
+      dark: {
+        bodyBg: "#020617",
+        cardBg: "#0f172a",
+        text: "#e5e7eb",
+        primary: "#38bdf8",
+      },
+    };
+
+    const theme = themes[themeName] || themes.purple;
+
+    // Body
+    document.body.style.backgroundColor = theme.bodyBg;
+    document.body.style.color = theme.text;
+
+    // Cards
+    document.querySelectorAll(".card").forEach((card) => {
+      card.style.backgroundColor = theme.cardBg;
+      card.style.color = theme.text;
+    });
+
+    // Buttons
+    document.querySelectorAll(".btn-primary, .btn-secondary").forEach((btn) => {
+      btn.style.backgroundColor = theme.primary;
+      btn.style.borderColor = theme.primary;
+      btn.style.color = "#ffffff";
+    });
+  }
+
+  // Initial setup
+  applyTheme("purple");
   updateChart();
 });

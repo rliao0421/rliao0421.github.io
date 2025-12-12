@@ -8,6 +8,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+
   <script src="Final.js" defer></script>
 </head>
 <body>
@@ -49,17 +51,33 @@
           </form>
         </div>
 
-        <div class="card">
-          <h2>Summary</h2>
-          <div class="summary-row">
-            <span>Total Spent:</span>
-            <span id="total-amount">$0.00</span>
-          </div>
-          <div class="summary-row">
-            <span>Number of Expenses:</span>
-            <span id="expense-count">0</span>
-          </div>
-        </div>
+<div class="card">
+  <h2>Summary</h2>
+  <div class="summary-row">
+    <span>Total Spent:</span>
+    <span id="total-amount">$0.00</span>
+  </div>
+  <div class="summary-row">
+    <span>Number of Expenses:</span>
+    <span id="expense-count">0</span>
+  </div>
+
+  <button id="download-pdf" class="btn-secondary">Download PDF Report</button>
+
+  <!-- THEME PICKER (add this) -->
+  <div class="theme-picker">
+    <h3>Theme</h3>
+    <p>Pick a color for your tracker:</p>
+    <div class="theme-buttons">
+      <button type="button" class="btn-secondary" data-theme="purple">Purple</button>
+      <button type="button" class="btn-secondary" data-theme="teal">Teal</button>
+      <button type="button" class="btn-secondary" data-theme="peach">Peach</button>
+      <button type="button" class="btn-secondary" data-theme="dark">Dark</button>
+    </div>
+  </div>
+</div>
+
+
       </section>
 
       <section class="right-panel">
