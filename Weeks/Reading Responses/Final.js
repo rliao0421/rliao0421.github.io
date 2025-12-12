@@ -11,10 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const expenseCountEl = document.getElementById("expense-count");
   const downloadPdfBtn = document.getElementById("download-pdf");
 
-  // Theme buttons (the ones with data-theme in HTML)
+  // Theme buttons
   const themeButtons = document.querySelectorAll("[data-theme]");
-
-  // --- EVENT LISTENERS ---
 
   // Add expense
   form.addEventListener("submit", (e) => {
@@ -43,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.reset();
   });
 
-  // Delete expense (event delegation)
+  // Delete expense
   tableBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-btn")) {
       const index = e.target.getAttribute("data-index");
@@ -68,8 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
       applyTheme(themeName);
     });
   });
-
-  // --- FUNCTIONS ---
 
   function renderTable() {
     tableBody.innerHTML = "";
@@ -167,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // PDF GENERATION (with chart)
+  // PDF generation
   function generatePdfReport() {
     if (!window.jspdf) {
       alert("jsPDF failed to load.");
@@ -198,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.setFont(undefined, "normal");
     y += 6;
 
-    // Expenses list (simple, no auto-page; you can extend later)
+    // Expenses list
     expenses.forEach((exp) => {
       if (y > 270) {
         doc.addPage();
@@ -224,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.save("expense_report.pdf");
   }
 
-  // Simple theme system (few preset colors)
+  // Simple theme system
   function applyTheme(themeName) {
     const themes = {
       purple: {
